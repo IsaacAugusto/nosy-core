@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Nosy.Core.EventBus
+namespace Nosy.EventBus
 {
     internal interface IEventBinding<T>
     {

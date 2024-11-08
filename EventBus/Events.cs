@@ -1,4 +1,4 @@
-﻿namespace Nosy.Core.EventBus
+﻿namespace Nosy.EventBus
 {
     public interface IEvent { }
 }

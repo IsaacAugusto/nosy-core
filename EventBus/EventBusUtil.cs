@@ -4,7 +4,7 @@ using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
-namespace Nosy.Core.EventBus
+namespace Nosy.EventBus
 {
     public static class EventBusUtil
     {

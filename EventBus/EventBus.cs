@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Nosy.Core.EventBus
+namespace Nosy.EventBus
 {
     public static class EventBus<T> where T : IEvent
     {
