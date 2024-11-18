@@ -1,0 +1,10 @@
+{
+  "name": "com.nosy.core",
+  "version": "1.0.0",
+  "displayName": "Nosy Core",
+  "description": "Utils game developer scripts and tools made by Nosy.",
+  "author": {
+    "name": "Nosy",
+    "url": "https://www.linkedin.com/in/isaac-augusto-dev/"
+  }
+}
