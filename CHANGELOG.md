@@ -1,5 +1,10 @@
-## [1.0.1] - 2024-11-18
-### Adding player loop utils and some namespace fixes
+## [1.0.1] - 2024-11-18 
+### Added
+- Adding player loop utils.
+- Adding bootstrap scene loader.
+
+### Changed
+- Changed namespaces
 
 ## [1.0.0] - 2024-11-18
 ### First release
