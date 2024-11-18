@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Nosy.EventBus
+namespace NosyCore.EventBus
 {
     public static class PredefinedAssembliesUtil
     {

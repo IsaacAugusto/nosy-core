@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Nosy.Core.Timer
+namespace NosyCore.Timer
 {
     public static class TimerManager
     {
