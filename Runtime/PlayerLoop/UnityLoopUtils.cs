@@ -26,7 +26,7 @@ namespace ArkaCore.UnityLoopUtils
             };
         }
         
-        [MenuItem("Tools/Print Player Loop")]
+        [MenuItem("Tools/NosyCore/Print Player Loop")]
         public static void PrintPlayerLoop()
         {
             var playerLoop = PlayerLoop.GetCurrentPlayerLoop();
