@@ -7,7 +7,7 @@ namespace NosyCore.Bootstrap
     {
         private const string BOOTSTRAP_SCENE_NAME = "Bootstrap";
 
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         public static void LoadBootstrapSceneIfExists()
         {
             for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
