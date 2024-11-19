@@ -19,7 +19,8 @@ namespace NosyCore.Timer
             var timerManagerLoop = new TimerManagerUpdateLoop();
             UnityLoopUtils.RegisterToUpdate(timerManagerLoop, before: typeof(Update));
         }
-        
+
+#if UNITY_EDITOR
         [UnityEditor.InitializeOnLoadMethod]
         private static void ResetStaticMembers()
         {
@@ -34,6 +35,7 @@ namespace NosyCore.Timer
                 }
             };
         }
+#endif
 
         private static void TickTimers()
         {
