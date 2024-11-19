@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using ArkaCore.UnityLoopUtils;
 using UnityEngine;
+using UnityEngine.LowLevel;
+using UnityEngine.PlayerLoop;
 
 namespace NosyCore.Timer
 {
@@ -12,29 +15,9 @@ namespace NosyCore.Timer
         private static void Init()
         {
             _activeTimers = new LinkedList<Timer>();
-            // Get Unity Player Loop System
             
-            var playerLoop = UnityEngine.LowLevel.PlayerLoop.GetCurrentPlayerLoop();
-            var subsystems = playerLoop.subSystemList;
-            var newSubsystems = new List<UnityEngine.LowLevel.PlayerLoopSystem>(subsystems.Length + 1);
-            
-            // Add TimerManager to the player loop
-            var timerManager = new UnityEngine.LowLevel.PlayerLoopSystem
-            {
-                type = typeof(TimerManager),
-                updateDelegate = TimerManager.TickTimers
-            };
-            
-            newSubsystems.Add(timerManager);
-            newSubsystems.AddRange(subsystems);
-            playerLoop.subSystemList = newSubsystems.ToArray();
-            UnityEngine.LowLevel.PlayerLoop.SetPlayerLoop(playerLoop);
-            
-            // loop through all the subsystems and print their type
-            // foreach (var subsystem in playerLoop.subSystemList)
-            // {
-            //     Debug.Log(subsystem.type);
-            // }
+            var timerManagerLoop = new TimerManagerUpdateLoop();
+            UnityLoopUtils.RegisterToUpdate(timerManagerLoop, before: typeof(Update));
         }
         
         [UnityEditor.InitializeOnLoadMethod]
@@ -46,8 +29,8 @@ namespace NosyCore.Timer
                 {
                     _activeTimers.Clear();
                     
-                    var defaultLoop = UnityEngine.LowLevel.PlayerLoop.GetDefaultPlayerLoop();
-                    UnityEngine.LowLevel.PlayerLoop.SetPlayerLoop(defaultLoop);
+                    var defaultLoop = PlayerLoop.GetDefaultPlayerLoop();
+                    PlayerLoop.SetPlayerLoop(defaultLoop);
                 }
             };
         }
@@ -77,6 +60,11 @@ namespace NosyCore.Timer
         public static void UnregisterTimer(Timer timer)
         {
             _activeTimers?.Remove(timer);
+        }
+        
+        private struct TimerManagerUpdateLoop : UnityLoopUtils.ICustomPlayerLoop
+        {
+            public PlayerLoopSystem.UpdateFunction UpdateFunction => TimerManager.TickTimers;
         }
     }
     
