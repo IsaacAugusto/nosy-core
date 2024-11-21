@@ -1,3 +1,8 @@
+## [1.0.2] - 2024-11-21
+### Added
+- Adding EasySingletons.
+- Adding DataService.
+
 ## [1.0.1] - 2024-11-18 
 ### Added
 - Adding player loop utils.
