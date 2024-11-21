@@ -23,10 +23,10 @@ Enables the creation of custom player loops in Unity. This utility allows you to
 
 A Timer Manager that leverages a custom player loop to process timers before the Update loop. This eliminates the need for calling Timer.Update(Time.deltaTime) manually. All timers are automatically registered and processed, simplifying the management of time-based events.
 
-### DataPersistenceService
+### Data Persistence Service
 
 A modular system for saving data to disk. Built with interfaces to support any type of serializer, it includes a default JSON serializer for quick prototyping. It also provides a singleton for saving and loading any serializable class directly.
 
-### EasySingleton
+### Easy Singleton
 
 Utilities for managing singletons. Includes GetOrCreateSingleton<T>, which retrieves an existing singleton instance of type T or creates a new GameObject with the component if none exists.
