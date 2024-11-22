@@ -1,3 +1,7 @@
+## [1.0.3] - 2024-11-21
+### Fixed
+- Fixed meta files for package.
+
 ## [1.0.2] - 2024-11-21
 ### Added
 - Adding EasySingletons.
