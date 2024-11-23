@@ -1,3 +1,7 @@
+## [1.0.3] - 2024-11-23
+### Added
+- Generic Chain Broker
+
 ## [1.0.3] - 2024-11-21
 ### Fixed
 - Fixed meta files for package.
