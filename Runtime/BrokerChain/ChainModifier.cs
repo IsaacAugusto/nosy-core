@@ -2,7 +2,7 @@
 {
     public abstract class ChainModifier<T>
     {
-        internal abstract T Handle(T Data);
+        public abstract T Handle(T Data);
     }
     
     public class FloatAddModifier : ChainModifier<float>
