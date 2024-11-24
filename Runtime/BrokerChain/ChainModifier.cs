@@ -13,8 +13,8 @@
         {
             _value = value;
         }
-        
-        internal override float Handle(float data)
+
+        public override float Handle(float data)
         {
             return data + _value;
         }
@@ -28,8 +28,8 @@
         {
             _ratio = ratio;
         }
-        
-        internal override float Handle(float data)
+
+        public override float Handle(float data)
         {
             return data * _ratio;
         }
