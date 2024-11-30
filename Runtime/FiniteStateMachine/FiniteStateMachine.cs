@@ -59,7 +59,7 @@ namespace NosyCore.FSM
         {
             foreach (var anyTransition in _anyTransitions)
             {
-                if (anyTransition.Condition.Evaluate())
+                if (anyTransition.Condition.Evaluate() && anyTransition.ToState != _currentState.State)
                 {
                     return anyTransition;
                 }
