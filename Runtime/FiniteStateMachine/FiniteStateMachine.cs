@@ -37,6 +37,7 @@ namespace NosyCore.FSM
         
         public void AddAnyTransition(IState to, IPredicate condition)
         {
+            GetOrAddNode(to);
             _anyTransitions.Add(new Transition(to, condition));
         }
 

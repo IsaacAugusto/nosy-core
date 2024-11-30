@@ -1,3 +1,7 @@
+## [1.0.4] - 2024-11-23
+### Changed
+- [FSM] Made any transitions make sure the state is added to the state machine.
+
 ## [1.0.3] - 2024-11-23
 ### Added
 - Generic Chain Broker
