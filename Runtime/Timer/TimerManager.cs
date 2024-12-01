@@ -45,7 +45,7 @@ namespace NosyCore.Timer
             {
                 var next = item.Next;
                 item.Value.Update(deltaTime);
-                if (item.Value.Running == false)
+                if (item.Value.Running == false && item.Value.Ended)
                 {
                     UnregisterTimer(item.Value);
                 }
@@ -73,6 +73,8 @@ namespace NosyCore.Timer
     public class Timer
     {
         public bool Running;
+
+        internal bool Ended;
         
         private float _duration;
         private float _timeElapsed;
@@ -98,6 +100,7 @@ namespace NosyCore.Timer
             _duration = duration;
             _timeElapsed = 0;
             Running = false;
+            Ended = false;
             TimerManager.RegisterTimer(this);
         }
         
@@ -110,14 +113,26 @@ namespace NosyCore.Timer
             OnTimerStart?.Invoke();
         }
         
+        public void Stop()
+        {
+            Running = false;
+        }
+
+        public void Restart(float duration = -1)
+        {
+            TimerManager.UnregisterTimer(this);
+            Init(duration > 0 ? duration : _duration);
+            Start();
+        }
+        
         public void Update(float deltaTime)
         {
             if (Running == false) return;
-            if (_timeElapsed >= _duration) return;
             
             _timeElapsed += deltaTime;
             if (_timeElapsed >= _duration)
             {
+                Ended = true;
                 Running = false;
                 OnTimerEnd?.Invoke();
             }

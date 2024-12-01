@@ -1,3 +1,7 @@
+## [1.0.5] - 2024-12-01
+### Changed
+- [Timer] Fixed timer logic.
+
 ## [1.0.4] - 2024-11-23
 ### Changed
 - [FSM] Made any transitions make sure the state is added to the state machine.
