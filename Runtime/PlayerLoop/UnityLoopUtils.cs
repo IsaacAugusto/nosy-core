@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.LowLevel;
 
-namespace ArkaCore.UnityLoopUtils
+namespace NosyCore.UnityLoop
 {
     public static class UnityLoopUtils
     {

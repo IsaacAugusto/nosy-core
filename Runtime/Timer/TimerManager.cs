@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using ArkaCore.UnityLoopUtils;
 using UnityEngine;
 using UnityEngine.LowLevel;
 using UnityEngine.PlayerLoop;
+
 
 namespace NosyCore.Timer
 {
@@ -17,7 +17,7 @@ namespace NosyCore.Timer
             _activeTimers = new LinkedList<Timer>();
             
             var timerManagerLoop = new TimerManagerUpdateLoop();
-            UnityLoopUtils.RegisterToUpdate(timerManagerLoop, before: typeof(Update));
+            UnityLoop.UnityLoopUtils.RegisterToUpdate(timerManagerLoop, before: typeof(Update));
         }
 
 #if UNITY_EDITOR
@@ -64,7 +64,7 @@ namespace NosyCore.Timer
             _activeTimers?.Remove(timer);
         }
         
-        private struct TimerManagerUpdateLoop : UnityLoopUtils.ICustomPlayerLoop
+        private struct TimerManagerUpdateLoop : UnityLoop.UnityLoopUtils.ICustomPlayerLoop
         {
             public PlayerLoopSystem.UpdateFunction UpdateFunction => TimerManager.TickTimers;
         }
