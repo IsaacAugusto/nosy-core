@@ -1,3 +1,7 @@
+## [1.0.6] - 2024-12-10
+### Added
+- Generic Command Chain / Chain of responsibility
+
 ## [1.0.5] - 2024-12-01
 ### Changed
 - [Timer] Fixed timer logic.

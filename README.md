@@ -30,3 +30,11 @@ A modular system for saving data to disk. Built with interfaces to support any t
 ### Easy Singleton
 
 Utilities for managing singletons. Includes GetOrCreateSingleton<T>, which retrieves an existing singleton instance of type T or creates a new GameObject with the component if none exists.
+
+### Broker Chain [Doc is WIP]
+
+Chain of modifiers to apply to a value.
+
+### Chain of Command / Chain of responsibility [Doc is WIP]
+
+Chain of handlers to process a message.
