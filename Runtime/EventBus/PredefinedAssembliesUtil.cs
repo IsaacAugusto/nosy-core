@@ -12,13 +12,14 @@ namespace NosyCore.EventBus
         {
             Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
 
-            var assembliesToRegister = Resources.Load<EventBusAssembliesAsset>("EventBusAssembliesAsset");
+            var settings = EventBusSettingsUtility.GetOrCreateSettings();
+            var assembliesToRegister = settings.assembliesWithEvents;
 
             List<Type> types = new List<Type>();
             for (int i = 0; i < assemblies.Length; i++)
             {
                 
-                if (assembliesToRegister.Assemblies.Contains(assemblies[i].GetName().Name))
+                if (assembliesToRegister.Contains(assemblies[i].GetName().Name))
                 {
                     AddTypesFromAssembly(assemblies[i].GetTypes(), types, interfaceType);
                 }
