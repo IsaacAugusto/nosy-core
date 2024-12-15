@@ -12,6 +12,7 @@ namespace NosyCore.EventBus
             AssemblyCSharpEditor,
             AssemblyCSharpFirstPass,
             AssemblyCSharpEditorFirstPass,
+            NosyCoreEventBus
         }
 
         static AssemblyType? GetAssemblyType(string assemblyName)
@@ -26,6 +27,8 @@ namespace NosyCore.EventBus
                     return AssemblyType.AssemblyCSharpFirstPass;
                 case "Assembly-CSharp-Editor-FirstPass":
                     return AssemblyType.AssemblyCSharpEditorFirstPass;
+                case "NosyCore-EventBus":
+                    return AssemblyType.NosyCoreEventBus;
                 default:
                     return null;
             }
@@ -61,6 +64,10 @@ namespace NosyCore.EventBus
             if (assemblyTypes.TryGetValue(AssemblyType.AssemblyCSharpEditorFirstPass, out var csharpEFPTypes))
             {
                 AddTypesFromAssembly(csharpEFPTypes, types, interfaceType);
+            }
+            if (assemblyTypes.TryGetValue(AssemblyType.NosyCoreEventBus, out var nosyCoreTypes))
+            {
+                AddTypesFromAssembly(nosyCoreTypes, types, interfaceType);
             }
 
             return types;
