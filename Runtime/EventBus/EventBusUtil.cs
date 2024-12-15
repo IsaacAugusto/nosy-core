@@ -45,7 +45,6 @@ namespace NosyCore.EventBus
             {
                 var busType = typedef.MakeGenericType(eventType);
                 eventBysTypes.Add(busType);
-                Debug.Log($"Init event bus of type {eventType.Name}");
             }
 
             return eventBysTypes;

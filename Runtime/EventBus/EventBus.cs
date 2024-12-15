@@ -21,7 +21,6 @@ namespace NosyCore.EventBus
 
         private static void Clear()
         {
-            Debug.Log($"Clearing {typeof(T).Name} bindings.");
             _bindings.Clear();
         }
     }

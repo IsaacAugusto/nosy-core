@@ -7,10 +7,10 @@ namespace NosyCore.EventBus
     {
         private EventBusSettings settings;
 
-        [MenuItem("Tools/NosyCore/Event Bus/Settings")]
+        [MenuItem("Tools/NosyCore/EventBus/Settings")]
         public static void ShowWindow()
         {
-            GetWindow<EventBusSettingsWindow>("Package Settings");
+            GetWindow<EventBusSettingsWindow>("EventBus Settings");
         }
 
         private void OnEnable()
@@ -26,7 +26,7 @@ namespace NosyCore.EventBus
                 return;
             }
 
-            EditorGUILayout.LabelField("Event Bus Configuration", EditorStyles.boldLabel);
+            EditorGUILayout.LabelField("EventBus Configuration", EditorStyles.boldLabel);
 
             SerializedObject serializedObject = new SerializedObject(settings);
             SerializedProperty stringListProperty = serializedObject.FindProperty("assembliesWithEvents");
