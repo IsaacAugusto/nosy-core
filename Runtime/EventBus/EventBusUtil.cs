@@ -40,6 +40,7 @@ namespace NosyCore.EventBus
             var eventBysTypes = new List<Type>();
 
             var typedef = typeof(EventBus<>);
+            Debug.Log($"Initializing event buses. {EventTypes.Count}");
             foreach (var eventType in EventTypes)
             {
                 var busType = typedef.MakeGenericType(eventType);
