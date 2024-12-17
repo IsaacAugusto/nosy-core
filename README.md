@@ -38,3 +38,7 @@ Chain of modifiers to apply to a value.
 ### Chain of Command / Chain of responsibility [Doc is WIP]
 
 Chain of handlers to process a message.
+
+### Dependency Attribute [Doc is WIP]
+
+Attribute to inject dependencies into a fields.

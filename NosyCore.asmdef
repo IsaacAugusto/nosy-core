@@ -1,6 +1,6 @@
 {
-    "name": "Nosy.Core",
-    "rootNamespace": "Nosy.Core",
+    "name": "NosyCore",
+    "rootNamespace": "NosyCore",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],

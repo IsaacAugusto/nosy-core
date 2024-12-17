@@ -1,3 +1,7 @@
+## [1.0.7] - 2024-12-17
+### Added
+- Dependency Attribute
+
 ## [1.0.6] - 2024-12-10
 ### Added
 - Generic Command Chain / Chain of responsibility
