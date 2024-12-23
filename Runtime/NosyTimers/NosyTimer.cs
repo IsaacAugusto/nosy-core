@@ -3,16 +3,8 @@ using System.Collections.Generic;
 
 namespace NosyCore.NosyTimers
 {
-    
     public class NosyTimer
     {
-        private struct TimerEvent
-        {
-            public float Time;
-            public Action Event;
-            public bool Fired;
-            public bool Repeat;
-        }
 
         public readonly bool Repeat;
         public bool Running;
@@ -23,7 +15,7 @@ namespace NosyCore.NosyTimers
         public float ElapsedDelaySec => _delayElapsed * 0.001f;
         public bool Ended => _timeElapsed >= _duration;
 
-        private List<TimerEvent> _timerEvents;
+        private List<ITimerEvent> _timerEvents;
         private int _duration;
         private int _timeElapsed;
         private int _delayDuration;
@@ -39,7 +31,7 @@ namespace NosyCore.NosyTimers
             OnTimerStart = onTimerStart;
             OnTimerEnd = onTimerEnd;
             OnDelayEnd = onDelayEnd;
-            _timerEvents = new List<TimerEvent>();
+            _timerEvents = new List<ITimerEvent>();
             Repeat = repeat;
         }
         
@@ -94,7 +86,7 @@ namespace NosyCore.NosyTimers
             
             _timeElapsed += deltaTimeMs;
             
-            UpdateTimerEvents();
+            UpdateTimerEvents(deltaTimeMs);
             
             if (_timeElapsed >= _duration)
             {
@@ -110,33 +102,34 @@ namespace NosyCore.NosyTimers
                 throw new ArgumentException($"Invalid time value [{time}]. Should be bigger than 0 ms and less than the duration of the timer [{_duration}].");
             }
             
-            _timerEvents.Add(new TimerEvent
+            _timerEvents.Add(new TimerEvent(time: time, @event: action, repeat: repeat));
+        }
+
+        public void AddRecurringTimerEvent(int recurringTimeMs, Action action, int repeatCount = -1)
+        {
+            if (recurringTimeMs <= 0 || recurringTimeMs >= _duration)
             {
-                Time = time,
-                Event = action,
-                Fired = false,
-                Repeat = repeat
-            });
+                throw new ArgumentException($"Invalid recurring time value [{recurringTimeMs}]. Should be bigger than 0 ms and less than the duration of the timer [{_duration}].");
+            }
+            
+            _timerEvents.Add(new RecurringTimerEvent(recurringTimeMs, action, repeatCount));
         }
         
-        private void UpdateTimerEvents()
+        private void UpdateTimerEvents(int deltaTimeMs)
         {
             if (Running == false) return;
             
             for (int i = _timerEvents.Count - 1; i >= 0; i--)
             {
                 var timerEvent = _timerEvents[i];
-                if (timerEvent.Fired) continue;
+                if (timerEvent.ShouldFire(_timeElapsed, deltaTimeMs) == false) continue;
                 
-                if (_timeElapsed >= timerEvent.Time)
+                timerEvent.Fire();
+                
+                if (timerEvent.ShouldRemoveAfterFired)
                 {
-                    timerEvent.Fired = true;
-                    timerEvent.Event?.Invoke();
-                    if (timerEvent.Repeat == false)
-                    {
-                        _timerEvents.RemoveAt(i);
-                        continue;
-                    }
+                    _timerEvents.RemoveAt(i);
+                    continue;
                 }
 
                 _timerEvents[i] = timerEvent;
@@ -148,7 +141,7 @@ namespace NosyCore.NosyTimers
             for (var index = 0; index < _timerEvents.Count; index++)
             {
                 var timerEvent = _timerEvents[index];
-                timerEvent.Fired = false;
+                timerEvent.OnTimerReset();
                 _timerEvents[index] = timerEvent;
             }
         }
