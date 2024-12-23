@@ -17,9 +17,9 @@ namespace NosyCore.NosyTimers
         public readonly bool Repeat;
         public bool Running;
         public float Progress => (float)_timeElapsed / _duration;
-        public float ElapsedTime => _timeElapsed;
+        public int ElapsedTimeMs => _timeElapsed;
+        public float ElapsedTimeSec => _timeElapsed * 0.001f;
         public bool Ended => _timeElapsed >= _duration;
-
 
         private List<TimerEvent> _timerEvents;
         private int _duration;
