@@ -103,7 +103,7 @@ namespace NosyCore.NosyTimers
             }
         }
         
-        public void AddTimerEvent(float time, Action action, bool repeat = false)
+        public void AddTimerEvent(int time, Action action, bool repeat = false)
         {
             if (time <= 0 || time >= _duration)
             {
