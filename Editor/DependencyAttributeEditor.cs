@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace NosyCore.Editor
 {
+#if UNITY_EDITOR
     [CustomPropertyDrawer(typeof(DependencyAttributeSelf), true)]
     public class DependencyAttributeEditor : PropertyDrawer
     {
@@ -15,4 +16,5 @@ namespace NosyCore.Editor
             EditorGUI.EndDisabledGroup();
         }
     }
+#endif
 }

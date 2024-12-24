@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace NosyCore.EventBus
 {
+#if UNITY_EDITOR
     public class EventBusSettingsWindow : EditorWindow
     {
         private EventBusSettings settings;
@@ -35,4 +36,5 @@ namespace NosyCore.EventBus
             EditorGUILayout.PropertyField(stringListProperty, new GUIContent("Assemblies With Events"), true);
         }
     }
+#endif
 }

@@ -17,15 +17,17 @@ namespace NosyCore.EventBus
 
         public static EventBusSettings GetOrCreateSettings()
         {
-            EventBusSettings settings = AssetDatabase.LoadAssetAtPath<EventBusSettings>(ConfigPath);
+            EventBusSettings settings = Resources.Load<EventBusSettings>(ConfigPath);
             if (settings == null)
             {
+#if UNITY_EDITOR
                 settings = ScriptableObject.CreateInstance<EventBusSettings>();
                 Directory.CreateDirectory(Path.GetDirectoryName(ConfigPath));
                 settings.assembliesWithEvents = new List<string> { "Assembly-CSharp", "Assembly-CSharp-FirstPass", "Assembly-CSharp-Editor", "Assembly-CSharp-Editor-FirstPass" };
                 
                 AssetDatabase.CreateAsset(settings, ConfigPath);
                 AssetDatabase.SaveAssets();
+#endif
             }
             return settings;
         }
