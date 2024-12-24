@@ -14,7 +14,7 @@ namespace NosyCore.EventBus
     public static class EventBusSettingsUtility
     {
         private const string ConfigAssetPathAtResources = "Assets/NosyCore/Resources";
-        private const string ConfigAssetName = "EventBusSettings.asset";
+        private const string ConfigAssetName = "EventBusSettings";
 
         public static EventBusSettings GetOrCreateSettings()
         {
