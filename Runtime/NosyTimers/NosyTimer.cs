@@ -3,9 +3,8 @@ using System.Collections.Generic;
 
 namespace NosyCore.NosyTimers
 {
-    public class NosyTimer
+    public class NosyTimer : IDisposable
     {
-
         public readonly bool Repeat;
         public bool Running;
         public float Progress => (float)_timeElapsed / _duration;
@@ -144,6 +143,11 @@ namespace NosyCore.NosyTimers
                 timerEvent.OnTimerReset();
                 _timerEvents[index] = timerEvent;
             }
+        }
+
+        public void Dispose()
+        {
+            TimeManager.UnregisterTimer(this);
         }
     }
 }
