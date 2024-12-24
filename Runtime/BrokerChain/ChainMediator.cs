@@ -36,6 +36,12 @@ namespace NosyCore.BrokerChain
             UpdateVersion();
         }
         
+        public void ClearModifiers()
+        {
+            _modifiers.Clear();
+            UpdateVersion();
+        }
+        
         public ChainQuery<T> CreateAndApplyQuery(T data)
         {
             CreateQuery(data);
