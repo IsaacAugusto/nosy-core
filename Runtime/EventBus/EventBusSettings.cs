@@ -13,19 +13,20 @@ namespace NosyCore.EventBus
 
     public static class EventBusSettingsUtility
     {
-        private const string ConfigPath = "Assets/Nosy_Core/EventBusSettings.asset";
+        private const string ConfigAssetPathAtResources = "Assets/NosyCore/Resources";
+        private const string ConfigAssetName = "EventBusSettings.asset";
 
         public static EventBusSettings GetOrCreateSettings()
         {
-            EventBusSettings settings = Resources.Load<EventBusSettings>(ConfigPath);
+            EventBusSettings settings = Resources.Load<EventBusSettings>(ConfigAssetName);
             if (settings == null)
             {
 #if UNITY_EDITOR
                 settings = ScriptableObject.CreateInstance<EventBusSettings>();
-                Directory.CreateDirectory(Path.GetDirectoryName(ConfigPath));
+                Directory.CreateDirectory(ConfigAssetPathAtResources);
                 settings.assembliesWithEvents = new List<string> { "Assembly-CSharp", "Assembly-CSharp-FirstPass", "Assembly-CSharp-Editor", "Assembly-CSharp-Editor-FirstPass" };
                 
-                AssetDatabase.CreateAsset(settings, ConfigPath);
+                AssetDatabase.CreateAsset(settings,  Path.Combine(ConfigAssetPathAtResources, ConfigAssetName));
                 AssetDatabase.SaveAssets();
 #endif
             }
