@@ -26,7 +26,7 @@ namespace NosyCore.EventBus
                 Directory.CreateDirectory(ConfigAssetPathAtResources);
                 settings.assembliesWithEvents = new List<string> { "Assembly-CSharp", "Assembly-CSharp-FirstPass", "Assembly-CSharp-Editor", "Assembly-CSharp-Editor-FirstPass" };
                 
-                AssetDatabase.CreateAsset(settings,  Path.Combine(ConfigAssetPathAtResources, ConfigAssetName));
+                AssetDatabase.CreateAsset(settings,  Path.Combine(ConfigAssetPathAtResources, $"{ConfigAssetName}.asset"));
                 AssetDatabase.SaveAssets();
 #endif
             }
