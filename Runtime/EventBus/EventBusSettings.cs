@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace NosyCore.EventBus
 {
-    [CreateAssetMenu(fileName = "EventBusSettings", menuName = "NosyCore/EventBusSettings", order = 0)]
+    [CreateAssetMenu(fileName = "EventBusSettings", menuName = "NosyCore/EventBus/EventBusSettings", order = 0)]
     public class EventBusSettings : ScriptableObject
     {
         public List<string> assembliesWithEvents;
