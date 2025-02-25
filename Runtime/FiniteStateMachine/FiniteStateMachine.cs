@@ -45,14 +45,15 @@ namespace NosyCore.FSM
         {
             if (_currentState?.State == state) return;
             
+            var nextState = _nodes[state.GetType()];
             var previousState = _currentState;
             if (previousState != null)
             {
-                previousState.State.OnExit();
+                previousState.State.OnExit(nextState.State);
             }
            
-            _currentState = _nodes[state.GetType()];
-            _currentState.State.OnEnter();
+            _currentState = nextState;
+            _currentState.State.OnEnter(previousState?.State);
         }
         
         private ITransition GetTransition()

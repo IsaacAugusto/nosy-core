@@ -4,10 +4,10 @@ namespace NosyCore.FSM
 {
     public interface IState
     {
-        void OnEnter();
+        void OnEnter(IState previousState);
         void OnUpdate();
         void OnFixedUpdate();
-        void OnExit();
+        void OnExit(IState nextState);
     }
 
     public interface IStateContext {}

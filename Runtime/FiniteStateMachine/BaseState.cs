@@ -2,7 +2,7 @@
 {
     public abstract class BaseState : IState
     {
-        public virtual void OnEnter()
+        public virtual void OnEnter(IState previousState)
         {
             // noop
         }
@@ -17,7 +17,7 @@
             // noop
         }
 
-        public virtual void OnExit()
+        public virtual void OnExit(IState nextState)
         {
             // noop
         }
