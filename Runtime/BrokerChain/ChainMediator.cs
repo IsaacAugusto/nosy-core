@@ -6,34 +6,40 @@ namespace NosyCore.BrokerChain
 {
     public class ChainMediator<T>
     {
-        private readonly LinkedList<ChainModifier<T>> _modifiers;
+        private readonly HashSet<ChainModifier<T>> _modifiers;
         private uint _version { get; set; }
         private ChainQuery<T> _query;
         
+        public int ModifiersCont => _modifiers.Count;
+        public bool HasModifiers => _modifiers.Count > 0;
+        public bool ContainsModifier(ChainModifier<T> modifier) => _modifiers.Contains(modifier);
+        
         public ChainMediator()
         {
-            _modifiers = new LinkedList<ChainModifier<T>>();
+            _modifiers = new HashSet<ChainModifier<T>>();
             _version = 0;
             CreateQuery(default);
         }
         
         public ChainMediator(T initialData)
         {
-            _modifiers = new LinkedList<ChainModifier<T>>();
+            _modifiers = new HashSet<ChainModifier<T>>();
             _version = 0;
             CreateQuery(initialData);
         }
 
-        public void AddModifier(ChainModifier<T> modifier)
+        public bool AddModifier(ChainModifier<T> modifier)
         {
-            _modifiers.AddLast(modifier);
+            var success = _modifiers.Add(modifier);
             UpdateVersion();
+            return success;
         }
         
-        public void RemoveModifier(ChainModifier<T> modifier)
+        public bool RemoveModifier(ChainModifier<T> modifier)
         {
-            _modifiers.Remove(modifier);
+            var success = _modifiers.Remove(modifier);
             UpdateVersion();
+            return success;
         }
         
         public void ClearModifiers()
@@ -54,17 +60,33 @@ namespace NosyCore.BrokerChain
             {
                 return _query;
             }
-            
-            var current = _modifiers.First;
-            while (current != null)
+
+            foreach (var modifier in _modifiers)
             {
-                _query.Data = current.Value.Handle(_query.Data);
-                current = current.Next;
+                _query.Data = modifier.Handle(_query.Data);
             }
             
             _query.Version = _version;
 
             return _query;
+        }
+
+        public void EnsureModifier(ChainModifier<T> modifier)
+        {
+            if (ContainsModifier(modifier))
+            {
+                return;
+            }
+            AddModifier(modifier);
+        }
+        
+        public void EnsureNoModifier(ChainModifier<T> modifier)
+        {
+            if (ContainsModifier(modifier) == false)
+            {
+                return;
+            }
+            RemoveModifier(modifier);
         }
 
         private void CreateQuery(T data)
