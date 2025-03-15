@@ -9,8 +9,9 @@ namespace NosyCore.BrokerChain
         private readonly HashSet<ChainModifier<T>> _modifiers;
         private uint _version { get; set; }
         private ChainQuery<T> _query;
+        private T _initialValue;
         
-        public int ModifiersCont => _modifiers.Count;
+        public int ModifiersCount => _modifiers.Count;
         public bool HasModifiers => _modifiers.Count > 0;
         public bool ContainsModifier(ChainModifier<T> modifier) => _modifiers.Contains(modifier);
         
@@ -18,6 +19,7 @@ namespace NosyCore.BrokerChain
         {
             _modifiers = new HashSet<ChainModifier<T>>();
             _version = 0;
+            _initialValue = default;
             CreateQuery(default);
         }
         
@@ -25,6 +27,7 @@ namespace NosyCore.BrokerChain
         {
             _modifiers = new HashSet<ChainModifier<T>>();
             _version = 0;
+            _initialValue = initialData;
             CreateQuery(initialData);
         }
 
@@ -61,6 +64,7 @@ namespace NosyCore.BrokerChain
                 return _query;
             }
 
+            _query.Data = _initialValue;
             foreach (var modifier in _modifiers)
             {
                 _query.Data = modifier.Handle(_query.Data);
