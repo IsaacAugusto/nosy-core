@@ -10,7 +10,9 @@ namespace NosyCore.BrokerChain
         private uint _version { get; set; }
         private ChainQuery<T> _query;
         private T _initialValue;
-        
+
+        public T FinalValue => QueryValue().Data;
+
         public int ModifiersCount => _modifiers.Count;
         public bool HasModifiers => _modifiers.Count > 0;
         public bool ContainsModifier(ChainModifier<T> modifier) => _modifiers.Contains(modifier);
