@@ -8,7 +8,7 @@
 
     public interface ISerializable
     {
-        public string FileName { get; private set }
+        public string FileName { get; private set; }
         public string SerializeData();
         public bool DeserializeData(string data);
     }
