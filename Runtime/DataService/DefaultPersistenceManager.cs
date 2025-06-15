@@ -12,14 +12,14 @@ namespace NosyCore.DataService
             _dataService = new FileDataService(new JsonSerializer());
         }
 
-        public void SaveData<T>(T data)
+        public void SaveData<T>(T data) where T : ISerializable
         {
             _dataService.Save(data);
         }
         
-        public T LoadData<T>()
+        public T LoadData<T>(T serializable) where T : ISerializable
         {
-            return _dataService.Load<T>();
+            return _dataService.Load(serializable);
         }
     }
 }
