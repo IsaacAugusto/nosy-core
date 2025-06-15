@@ -4,7 +4,7 @@ namespace NosyCore.DataService
 {
     public class DefaultPersistenceManager : PersistentMonoBehaviourSingleton<DefaultPersistenceManager>
     {
-        private FileDataService _dataService;
+        protected FileDataService _dataService;
 
         protected override void Awake()
         {
