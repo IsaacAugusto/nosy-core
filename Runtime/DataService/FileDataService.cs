@@ -13,7 +13,7 @@ namespace NosyCore.DataService
         public FileDataService(ISerializer serializer)
         {
             _dataPath = Application.persistentDataPath;
-            _fileExtension = "json";
+            _fileExtension = "NosyData";
             _serializer = serializer;
         }
         
