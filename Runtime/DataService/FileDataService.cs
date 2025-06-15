@@ -17,9 +17,9 @@ namespace NosyCore.DataService
             _serializer = serializer;
         }
         
-        public void Save<T>(T data, bool overwrite = true)
+        public void Save<T>(T data, bool overwrite = true) where T : ISerializable
         {
-            var typeName = typeof(T).Name;
+            var typeName = data.FileName;
             var fileLoc = GetPathToFile(typeName);
             
             if (!overwrite && File.Exists(fileLoc))
@@ -30,9 +30,9 @@ namespace NosyCore.DataService
             File.WriteAllText(fileLoc, _serializer.Serialize(data));
         }
 
-        public T Load<T>()
+        public T Load<T>(T serializable) where T : ISerializable
         {
-            var typeName = typeof(T).Name;
+            var typeName = serializable.FileName;
             var fileLoc = GetPathToFile(typeName);
             
             if (!File.Exists(fileLoc))
@@ -43,9 +43,9 @@ namespace NosyCore.DataService
             return _serializer.Deserialize<T>(File.ReadAllText(fileLoc));
         }
 
-        public void Delete<T>(T name)
+        public void Delete<T>(T data) where T : ISerializable
         {
-            var typeName = typeof(T).Name;
+            var typeName = data.FileName;
             var fileLoc = GetPathToFile(typeName);
             
             if (!File.Exists(fileLoc))
