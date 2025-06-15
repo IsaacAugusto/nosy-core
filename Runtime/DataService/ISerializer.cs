@@ -9,6 +9,6 @@
     public interface ISerializable
     {
         public string SerializeData();
-        public bool DeserializeData(string data)
+        public bool DeserializeData(string data);
     }
 }
